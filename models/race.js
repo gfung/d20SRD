@@ -2,7 +2,10 @@
 
 const raceSchema = new mongoose.Schema({
 	name: { type: String, unique: true },
-	stat_bonus: type: Number,
+	stat_bonus: {
+		stat: String,
+		value: Number
+	},
 	age: {type: Number, min:0, max:500}
 	size: string,
 	features: Array,
