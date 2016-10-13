@@ -1,6 +1,6 @@
 //Class schema
 
-const classSchema = new mongoose.Schema({
+const Char_ClassSchema = new mongoose.Schema({
 	name: { type: String, unique: true },
 	hit_die: type: Number,
 	proficiencies : {
@@ -25,6 +25,6 @@ const classSchema = new mongoose.Schema({
 	level_nine_spells: Array,
 })
 
-const Class = mongoose.model('Class', classSchema);
+const Char_Class = mongoose.model('Char_Class', Char_ClassSchema);
 
-module.exports = Class;
+module.exports = Char_Class;
