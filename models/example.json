@@ -1,4 +1,4 @@
-let barbarian={
+{
 	hd: 12,
 	armor:["light", "shields"],
 	weapons:["simple", "martial"]
