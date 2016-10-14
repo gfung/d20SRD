@@ -33,17 +33,22 @@ let bard = {
 		["Ability Score Improvement"], //19
 		["Primal Champion"], //20
 	],
-	cantrips_known: 	[0,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],//
-	spells_known: 		[0,4,5,6,7,8,9,10,11,12,14,15,15,16,18,19,19,20,22,22,22],//
-	level_one_spells: 	[0,2,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],//
-	level_two_spells: 	[0,0,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],//
-	level_three_spells: [0,0,0,0,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],//
-	level_four_spells: 	[0,0,0,0,0,0,0,1,2,3,3,3,3,3,3,3,3,3,3,3,3],//
-	level_five_spells: 	[0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,3,3,3],//
-	level_six_spells: 	[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2],//
-	level_seven_spells: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2],//
-	level_eight_spells: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1], //
-	level_nine_spells: 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1], //
+	spells:{
+		can_use: true,
+		type: "bard",
+		cantrips_known: 	[0,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],//
+		spells_known: 		[0,4,5,6,7,8,9,10,11,12,14,15,15,16,18,19,19,20,22,22,22],//
+		level_one_spells: 	[0,2,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],//
+		level_two_spells: 	[0,0,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],//
+		level_three_spells: [0,0,0,0,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],//
+		level_four_spells: 	[0,0,0,0,0,0,0,1,2,3,3,3,3,3,3,3,3,3,3,3,3],//
+		level_five_spells: 	[0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,3,3,3],//
+		level_six_spells: 	[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2],//
+		level_seven_spells: [0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2],//
+		level_eight_spells: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1], //
+		level_nine_spells: 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1], //
+	}
+	
 }
 
 let elf = {
@@ -74,7 +79,7 @@ let player_input={
 		}
 	],
 	name:"Trogdor",
-	spells: false,
+	cantrips:[],
 	level_one_spells: [],
 	level_two_spells: [],
 	level_three_spells: [],
@@ -91,11 +96,31 @@ function char_sheet(input) {
 	//calculate char ecl
 	let ecl=0
 	final.class=[]
+	final.spells=[]
+	//loop through classes
 	for (let i =0;i < input.class.length;i++){
 		//ecl
 		ecl += input.class[i].level 
 		//class
 		final.class.push(input.class[i])
+		//spells
+		if(input.class[i].type.spells.can_use){
+			let spelltype = {
+				cantrips_known: 	input.class[i].type.spells.cantrips_known[input.class[i].level],
+				spells_known: 		input.class[i].type.spells.spells_known[input.class[i].level],
+				level_one_spells: 	input.class[i].type.spells.level_one_spells[input.class[i].level],
+				level_two_spells: 	input.class[i].type.spells.level_two_spells[input.class[i].level],
+				level_three_spells: input.class[i].type.spells.level_three_spells[input.class[i].level],
+				level_four_spells: 	input.class[i].type.spells.level_four_spells[input.class[i].level],
+				level_five_spells: 	input.class[i].type.spells.level_five_spells[input.class[i].level],
+				level_six_spells: 	input.class[i].type.spells.level_six_spells[input.class[i].level],
+				level_seven_spells: input.class[i].type.spells.level_seven_spells[input.class[i].level],
+				level_eight_spells: input.class[i].type.spells.level_eight_spells[input.class[i].level],
+				level_nine_spells: 	input.class[i].type.spells.level_nine_spells[input.class[i].level]
+			}
+			//spelltype
+			final.spells.push(spelltype)
+		}
 	}
 	//classes
 	
@@ -133,22 +158,7 @@ function char_sheet(input) {
 				break;
 		}
 	}
-	//spells
-	if(input.spells){
-		//# of spells
-		final.cantrips_known = input.class.cantrips_known
-		input.class.spells_known = input.class.spells_known
-		//the spells
-		input.level_one_spells
-		input.level_two_spells
-		input.level_three_spells
-		input.level_four_spells
-		input.level_five_spells
-		input.level_six_spells
-		input.level_seven_spells
-		input.level_eight_spells
-		input.level_nine_spells
-	}
+	
 
 	//return final stats
 	return final
