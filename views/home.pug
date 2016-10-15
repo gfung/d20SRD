@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1 D20 SRD Character Generator Helper
+  hr
+  .row
+    .col-sm-6
+      h2 Races
+      p
+        a.btn.btn-default(href='/race/make', role='button') Create »
+      p
+        a.btn.btn-default(href='/race/list', role='button') View »
+    .col-sm-6
+      h2 Classes
+      p 
+        a.btn.btn-default(href='/class/make', role='button') Create »
+      p
+        a.btn.btn-default(href='/class/list', role='button') View »
+    .col-sm-6
+      h2 Characters
+      p
+        a.btn.btn-default(href='/player/make', role='button') Create »
+      p
+        a.btn.btn-default(href='/player/list', role='button') View »
+
+    .col-sm-6
+      h2 Features
+      p
+        a.btn.btn-default(href='/feat/make', role='button') Create »
+      p
+        a.btn.btn-default(href='/feat/list', role='button') View »

@@ -79,16 +79,11 @@ let player_input={
 		}
 	],
 	name:"Trogdor",
-	cantrips:[],
-	level_one_spells: [],
-	level_two_spells: [],
-	level_three_spells: [],
-	level_four_spells: [],
-	level_five_spells: [],
-	level_six_spells: [],
-	level_seven_spells: [],
-	level_eight_spells: [],
-	level_nine_spells: [],
+	cantrips:["Light", "Dancing Candles"],
+	spell_list: [
+		["Light", "Dancing Candles"],
+		["Magic Missile", "Burning Hands"]
+	]
 }
 
 function char_sheet(input) {
@@ -97,6 +92,7 @@ function char_sheet(input) {
 	let ecl=0
 	final.class=[]
 	final.spells=[]
+
 	//loop through classes
 	for (let i =0;i < input.class.length;i++){
 		//ecl
@@ -122,7 +118,8 @@ function char_sheet(input) {
 			final.spells.push(spelltype)
 		}
 	}
-	//classes
+	//add spells, limited by spell count
+	final.spell_list = inputspell_list;
 	
 	//char name
 	final.name=input.name;

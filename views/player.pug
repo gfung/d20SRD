@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1 Creator
+    div(id="model_one" style="display: none;")
+        | #{data}
+    form(method="post" action="/race")
+        div#here
+    script(src="/js/player_make.js")
