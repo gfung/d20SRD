@@ -9,7 +9,6 @@ for (each in temp.paths) {
                 break;
             case "Array":
                 // $("#here").append("<div><label >"+each+"</label> : <input name='"+each+"' type='text' placeholder='Separate by comma'></div>")
-                console.log(each)
                 $("#here").append("<div><label id='"+each+"'>"+each+"</label> :</div> <div id='"+each+"_input'><input name='"+each+"' type='text'></div>")
                 break;
             case "String":
@@ -39,8 +38,15 @@ if ($("#player_race")) {
 
 if ($("#player_class")){
     $.post("/class/list", {'_csrf':csrf}).then(function(data){
+        //add class function
+       
+        //append to html stuff
         $("#player_class_input").html(`
             <select id='player_class_input_select' name="player_class"></select>
+            Level : <input id='player_class_level' name="player_class_level" type="number">
+            <div id="multi"></div>
+            <br>
+            <button type="button" id="add_class_button" onclick='add_class()'>Add Another Class</button>
         `)
         for (let i = 0;i <data.length;i++){
             if(data[i].name != undefined){
@@ -50,4 +56,19 @@ if ($("#player_class")){
             }
         }
     })
+}
+
+let classnum=0;
+function add_class(){
+    $("#multi").append(`
+        <div id="`+classnum+`">
+            <select id='player_class_multi`+classnum+`' name="player_class_multi"></select>
+            Level : <input id='player_class_level' name="player_class_level" type="number">
+            <button type="button" onclick="$('#`+classnum+`').remove();">Remove me</button>
+        </div>`
+    )
+    
+    var $options = $("#player_class_input_select > option").clone();
+    $("#player_class_multi"+classnum).append($options)
+    classnum++
 }

@@ -4,6 +4,8 @@ block content
     h1 Creator
     div(id="model_one" style="display: none;")
         | #{data}
-    form(method="post" action="/race")
+    form(method="post" action="/player/make")
+        input(type="hidden" name="_csrf" value=_csrf)
         div#here
+        button.btn Create
     script(src="/js/player_make.js")

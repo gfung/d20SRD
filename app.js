@@ -146,7 +146,9 @@ app.route("/class/list")
 
 app.route("/player/make")
 	.get(playerController.get_player_make)
-
+  .post(playerController.post_player_make)
+app.route("/player/list")
+  .get(playerController.get_player_list)
 /**
  * OAuth authentication routes. (Sign in)
  */
