@@ -80,16 +80,40 @@ exports.post_player_make = (req, res, next) => {
  * Character
  */
 exports.get_player_list = (req, res, next) => {
-    Player.find({}, (err, existingUser) => {
-        //check for errors or existing by the same name
+    return res.render('character_list', {
+        title: 'Character List',
+    })
+};
+
+/**
+ * post /
+ * Character
+ */
+exports.post_player_list = (req, res, next) => {
+    Player.find({}, function(err, data) {
         if (err) { return next(err); }
-        if(existingUser) {
-            let data = existingUser;
-            console.log(data)
-            return res.render('character_sheet', {
-                title: 'Character Sheet',
-                data: data
-            })
-        }
+        res.send(data)
+    })
+};
+
+/**
+ * GET /
+ * Character
+ */
+exports.get_player_sheet = (req, res, next) => {
+    //send all data
+    res.render('character_sheet', {
+        title: "Character Sheet"
+    })
+};
+
+/**
+ * post /
+ * Character
+ */
+exports.post_player_sheet = (req, res, next) => {
+    Player.findOne({player_name: req.body.name}, function(err, data) {
+        if (err) { return next(err); }
+        res.send(data)
     })
 };

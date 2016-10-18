@@ -1,5 +1,10 @@
 extends layout
 
 block content
-        div(id="model_one")
-        | #{data}
+    pre#data
+    script.
+        let csrf = $('[name="csrf-token"]').prop('content')
+        let sheet = window.location.pathname.split('/')
+        $.post("/player/character_sheet/"+sheet[3], {'_csrf': csrf, 'name': sheet[3]}).then(function(data){ 
+            console.log(data)
+        })

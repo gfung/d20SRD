@@ -149,6 +149,10 @@ app.route("/player/make")
   .post(playerController.post_player_make)
 app.route("/player/list")
   .get(playerController.get_player_list)
+  .post(playerController.post_player_list)
+app.route("/player/character_sheet/:player")
+  .get(playerController.get_player_sheet)
+  .post(playerController.post_player_sheet)
 /**
  * OAuth authentication routes. (Sign in)
  */

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    div#playername
+    script.
+        let csrf = $('[name="csrf-token"]').prop('content')
+        $.post("/player/list", {'_csrf': csrf}).then(function(data){ 
+            for (let i=0;i<data.length;i++){
+                console.log(data[i])
+                $("#playername").append(`
+                    <div><a href="/player/character_sheet/`+ data[i].player_name+`">`+ data[i].player_name+`</div>
+                `)
+            }
+        })
