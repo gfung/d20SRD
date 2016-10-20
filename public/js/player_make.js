@@ -3,6 +3,7 @@ let csrf = $("[name='csrf-token']").prop('content')
 let temp = JSON.parse($("#model_one").html())
 for (each in temp.paths) {
     if ( (each != "_id") && (each !="__v") ) {
+
         switch (temp.paths[each].instance) {
             case "Number":
                 $("#here").append("<div><label >"+each+"</label> : <input name='"+each+"' type='number' value=10></div>")
@@ -14,8 +15,8 @@ for (each in temp.paths) {
             case "String":
                 $("#here").append("<div ><label id='"+each+"'>"+each+"</label> :</div> <div id='"+each+"_input'><input name='"+each+"' type='text'></div>")
                 break;
-            case "Object":
-                console.log(temp.paths[each])
+            case "ObjectID":
+                $("#here").append("<div><label id='"+each+"'>"+each+"</label> :</div> <div id='"+each+"_input'><input name='"+each+"' type='text'></div>")
                 break;
         }
     }
@@ -23,6 +24,7 @@ for (each in temp.paths) {
 
 if ($("#player_race")) {
     $.post("/race/list", {'_csrf':csrf}).then(function(data){
+        //append to html stuff
         $("#player_race_input").html(`
             <select id='player_race_input_select' name="player_race"></select>
         `)

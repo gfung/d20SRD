@@ -1,5 +1,21 @@
 const Player = require('../models/player');
+const Char_class = require('../models/char_class');
+const Race = require('../models/race');
+
 const PlayerSchema = require('mongoose').model('Player').schema
+
+const get_class = function(class_name) {
+    Char_class.findOne({'name' : class_name}).exec(function(err, data) {
+        return data;
+    })
+}
+
+const get_race = function(race_name) {
+    Race.findOne({'name' : race_name}).exec(function(err, data) {
+        return data;
+    })
+}
+
 /**
  * GET /
  * Home page.
@@ -13,7 +29,7 @@ exports.get_player_make = (req, res, next) => {
 
 /**
  * POST /
- * Race Create
+ * Player Create
  */
 exports.post_player_make = (req, res, next) => {
     //validation + sanitization
@@ -35,19 +51,23 @@ exports.post_player_make = (req, res, next) => {
         }
         return tobetrimmed
     }
+    
+    //get the class
+
     let alltheclasses=[];
     if(req.body.player_class_multi){
         alltheclasses = [ {pclass: req.body.player_class, pclass_level: req.player_class_level[0]} ]
         for (let i=0;i<req.body.player_class_multi.length;i++){
-            alltheclasses.push( { pclass: req.body.player_class_multi[i], pclass_level: parseInt(req.body.player_class_level[i+1]) } )
+            
+            alltheclasses.push( { pclass: get_class(eq.body.player_class), pclass_level: parseInt(req.body.player_class_level[i+1]) } )
         }
     }else {
-        alltheclasses.push({pclass: req.body.player_class, pclass_level: parseInt(req.body.player_class_level) })
+        alltheclasses.push({pclass: get_class(req.body.player_class), pclass_level: parseInt(req.body.player_class_level) })
     }
 
     const player = new Player({
         player_class: alltheclasses,
-        player_race: req.body.player_race,
+        player_race: get_race(req.body.player_race),
         player_name: req.body.player_name,
         ability_scores: {
             str: parseInt(req.body['ability_scores.str']),
@@ -67,11 +87,11 @@ exports.post_player_make = (req, res, next) => {
             return res.redirect('/player/make');
         }
         // No errors, no duplicates
-        player.save((err) => {
-            if (err) { return next(err); }
-            req.flash('info', { msg: 'Success!' });
-            res.redirect('/player/make');
-        });
+        // player.save((err) => {
+        //     if (err) { return next(err); }
+        //     req.flash('info', { msg: 'Success!' });
+        //     res.redirect('/player/make');
+        // });
     })
 };
 
@@ -111,9 +131,16 @@ exports.get_player_sheet = (req, res, next) => {
  * post /
  * Character
  */
+
 exports.post_player_sheet = (req, res, next) => {
-    Player.findOne({player_name: req.body.name}, function(err, data) {
+    Player.findOne({player_name: req.body.name}).then(function(err, data) {
         if (err) { return next(err); }
-        res.send(data)
+        if(data) {
+            console.log("======", data)
+            return res.send();
+            
+        } else{
+            return res.send("no data")
+        }
     })
 };
