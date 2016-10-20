@@ -8,7 +8,7 @@ const ObjectId = mongoose.Types.ObjectId();
 const playerSchema = new mongoose.Schema({
     player_class: [
         { 
-            pclass: {type: mongoose.Schema.Types.ObjectId, ref: 'Char_class'},
+            pclass: {type: mongoose.Schema.Types.ObjectId, ref: 'Char_Class'},
             pclass_level: { type: Number }, 
         }
     ],

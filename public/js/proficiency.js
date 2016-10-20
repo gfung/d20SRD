@@ -7,6 +7,6 @@ function probonus(edition, bab_class) {
                 let divide = Math.floor(i/4) +2;
                 pro_bonus.push(divide);
             };
-            return pro_bonus;
+            return pro_bonus[bab_class];
     }
 }

@@ -126,7 +126,7 @@ exports.get_player_sheet = (req, res, next) => {
  */
 
 exports.post_player_sheet = (req, res, next) => {
-    Player.findOne({'player_name' : req.body.name}).populate('player_race pclass').exec(function(err, data){
+    Player.findOne({'player_name' : req.body.name}).populate('player_race player_class.pclass').exec(function(err, data){
         if (err) { 
             req.flash('errors', 'Could not retrieve Character data!');
             return next(err); }
