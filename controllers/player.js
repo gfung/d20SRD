@@ -11,11 +11,8 @@ const get_class = function(class_name) {
 }
 
 const get_race = function(race_name) {
-    console.log(race_name)
-    Race.findOne({'name' : race_name}).exec(function(err, data) {
-        console.log(err,data)
-        return data;
-    })
+    console.log("race name ::::::::::::::::::::::::::", race_name)
+    
 }
 
 /**
@@ -44,43 +41,6 @@ exports.post_player_make = (req, res, next) => {
         req.flash('errors', errors);
         return res.redirect('/class/make');
     }
-    
-    //string to array and trim it!
-    function trim_it(tobetrimmed) {
-        tobetrimmed = tobetrimmed.split(",")
-        for(let i = 0; i < tobetrimmed.length; i++){
-            tobetrimmed[i] = tobetrimmed[i].trim();
-        }
-        return tobetrimmed
-    }
-    
-    //get the class
-
-    let alltheclasses=[];
-    if(req.body.player_class_multi){
-        alltheclasses = [ {pclass: req.body.player_class, pclass_level: req.player_class_level[0]} ]
-        for (let i=0;i<req.body.player_class_multi.length;i++){
-            
-            alltheclasses.push( { pclass: get_class(eq.body.player_class), pclass_level: parseInt(req.body.player_class_level[i+1]) } )
-        }
-    }else {
-        alltheclasses.push({pclass: get_class(req.body.player_class), pclass_level: parseInt(req.body.player_class_level) })
-    }
-    let temp_race = get_race(req.body.player_race)
-    console.log(temp_race)
-    const player = new Player({
-        player_class: alltheclasses,
-        player_race: temp_race,
-        player_name: req.body.player_name,
-        ability_scores: {
-            str: parseInt(req.body['ability_scores.str']),
-            dex: parseInt(req.body['ability_scores.dex']),
-            con: parseInt(req.body['ability_scores.con']),
-            int: parseInt(req.body['ability_scores.int']),
-            wis: parseInt(req.body['ability_scores.wis']),
-            cha: parseInt(req.body['ability_scores.cha']),
-        }
-    });
 
     Player.findOne({ player_name: req.body.player_name }, (err, existingUser) => {
         //check for errors or existing by the same name
@@ -90,11 +50,41 @@ exports.post_player_make = (req, res, next) => {
             return res.redirect('/player/make');
         }
         // No errors, no duplicates
-        player.save((err) => {
+        Char_class.findOne({'name' : req.body.player_class}).exec(function(err, class_data) {
             if (err) { return next(err); }
-            req.flash('info', { msg: 'Success!' });
-            res.redirect('/player/make');
-        });
+            Race.findOne({'name' : req.body.player_race}).exec(function(err, race_data) {
+                if (err) { return next(err); }
+                let alltheclasses=[];
+                if(req.body.player_class_multi){
+                    alltheclasses = [ {pclass: req.body.player_class, pclass_level: req.player_class_level[0]} ]
+                    for (let i=0;i<req.body.player_class_multi.length;i++){
+                        
+                        alltheclasses.push( { pclass: class_data, pclass_level: parseInt(req.body.player_class_level[i+1]) } )
+                    }
+                }else {
+                    alltheclasses.push({pclass: class_data, pclass_level: parseInt(req.body.player_class_level) })
+                }
+                const player = new Player({
+                    player_class: alltheclasses,
+                    player_race: race_data,
+                    player_name: req.body.player_name,
+                    ability_scores: {
+                        str: parseInt(req.body['ability_scores.str']),
+                        dex: parseInt(req.body['ability_scores.dex']),
+                        con: parseInt(req.body['ability_scores.con']),
+                        int: parseInt(req.body['ability_scores.int']),
+                        wis: parseInt(req.body['ability_scores.wis']),
+                        cha: parseInt(req.body['ability_scores.cha']),
+                    }
+                });
+                player.save((err) => {
+                    if (err) { return next(err); }
+                    req.flash('info', { msg: 'Success!' });
+                    res.redirect('/player/make');
+                });
+            })
+        })
+
     })
 };
 
@@ -136,11 +126,12 @@ exports.get_player_sheet = (req, res, next) => {
  */
 
 exports.post_player_sheet = (req, res, next) => {
-    Player.findOne({'player_name' : req.body.name}, function(err, data){
+    Player.findOne({'player_name' : req.body.name}).populate('player_race pclass').exec(function(err, data){
         if (err) { 
             req.flash('errors', 'Could not retrieve Character data!');
             return next(err); }
         if(data) {
+            console.log(data)
             return res.send(data)
         }
     })
