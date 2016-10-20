@@ -11,7 +11,9 @@ const get_class = function(class_name) {
 }
 
 const get_race = function(race_name) {
+    console.log(race_name)
     Race.findOne({'name' : race_name}).exec(function(err, data) {
+        console.log(err,data)
         return data;
     })
 }
@@ -64,10 +66,11 @@ exports.post_player_make = (req, res, next) => {
     }else {
         alltheclasses.push({pclass: get_class(req.body.player_class), pclass_level: parseInt(req.body.player_class_level) })
     }
-
+    let temp_race = get_race(req.body.player_race)
+    console.log(temp_race)
     const player = new Player({
         player_class: alltheclasses,
-        player_race: get_race(req.body.player_race),
+        player_race: temp_race,
         player_name: req.body.player_name,
         ability_scores: {
             str: parseInt(req.body['ability_scores.str']),
@@ -87,11 +90,11 @@ exports.post_player_make = (req, res, next) => {
             return res.redirect('/player/make');
         }
         // No errors, no duplicates
-        // player.save((err) => {
-        //     if (err) { return next(err); }
-        //     req.flash('info', { msg: 'Success!' });
-        //     res.redirect('/player/make');
-        // });
+        player.save((err) => {
+            if (err) { return next(err); }
+            req.flash('info', { msg: 'Success!' });
+            res.redirect('/player/make');
+        });
     })
 };
 
@@ -133,14 +136,13 @@ exports.get_player_sheet = (req, res, next) => {
  */
 
 exports.post_player_sheet = (req, res, next) => {
-    Player.findOne({player_name: req.body.name}).then(function(err, data) {
-        if (err) { return next(err); }
+    Player.findOne({'player_name' : req.body.name}, function(err, data){
+        if (err) { 
+            req.flash('errors', 'Could not retrieve Character data!');
+            return next(err); }
         if(data) {
-            console.log("======", data)
-            return res.send();
-            
-        } else{
-            return res.send("no data")
+            return res.send(data)
         }
     })
+    
 };

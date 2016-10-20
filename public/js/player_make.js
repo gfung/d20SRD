@@ -29,10 +29,18 @@ if ($("#player_race")) {
             <select id='player_race_input_select' name="player_race"></select>
         `)
         for (let i = 0;i <data.length;i++){
-            if(data[i].name != undefined){
-                $("#player_race_input_select").append(`
-                    <option> `+data[i].name+` </option>
-                `)
+            if(i==0){
+                if(data[i].name != undefined){
+                    $("#player_race_input_select").append(`
+                        <option selected> `+data[i].name+` </option>
+                    `)
+                }
+            }else {
+                if(data[i].name != undefined){
+                    $("#player_race_input_select").append(`
+                        <option> `+data[i].name+` </option>
+                    `)
+                }
             }
         }
     })
@@ -51,10 +59,18 @@ if ($("#player_class")){
             <button type="button" id="add_class_button" onclick='add_class()'>Add Another Class</button>
         `)
         for (let i = 0;i <data.length;i++){
-            if(data[i].name != undefined){
-                $("#player_class_input_select").append(`
-                    <option> `+data[i].name+` </option>
-                `)
+            if(i==0){
+                if(data[i].name != undefined){
+                    $("#player_class_input_select").append(`
+                        <option selected> `+data[i].name+` </option>
+                    `)
+                }
+            }else {
+                if(data[i].name != undefined){
+                    $("#player_class_input_select").append(`
+                        <option> `+data[i].name+` </option>
+                    `)
+                }
             }
         }
     })

@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 Creator
-    div(id="model_one" )
+    div(id="model_one" style="display: none;")
         | #{data}
     form(method="post" action="/player/make")
         input(type="hidden" name="_csrf" value=_csrf)

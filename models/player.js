@@ -13,7 +13,7 @@ const playerSchema = new mongoose.Schema({
         }
     ],
     player_race: {type: mongoose.Schema.Types.ObjectId, ref: 'Race'},
-    player_name: { type: String },
+    player_name: { type: String, unique: true },
     ability_scores: {
         str: { type: Number, min: 1 },
         dex: { type: Number, min: 1 },
