@@ -117,14 +117,17 @@ block content
                 div Flaws
                     div
                         textarea(rows=4)
-                div Features & Traits
+                div 
+                    u Features & Traits
                     div#feats
     br
     div.row
         div.col-xs-3
-            div#Other Proficiencies
+            div#Other 
+                u Proficiencies
         div.col-xs-9
-            div Equipment/Items
+            div 
+                u Equipment/Items
 
 
     script(src='/js/proficiency.js')
@@ -167,7 +170,6 @@ block content
             $('#Wisdombonus').append( ((abi_scores[4]-10)/2) || 0 )
             $('#Charisma').append(abi_scores[5])
             $('#Charismabonus').append( ((abi_scores[5]-10)/2) || 0 )
-            
             //check off saving throws
             for (let i=0;i< data.player_class.length;i++){
                 for ( let j=0;j<data.player_class[i].pclass.proficiencies.saving_throws.length;j++){
@@ -190,9 +192,15 @@ block content
              *  class bonuses
              */
 
+            //
+
+            //levels and ECL
             for (let i =0;i < data.player_class.length;i++){
+                //get class levels and ecl
                 $("#classlevel").append(data.player_class[i].pclass.name+" "+data.player_class[i].pclass_level)
                 ecl += data.player_class[i].pclass_level
+                //get features
+
             }
             $("#classlevel").append(" ECL"+ecl)
             $("#pro_bonus").append(probonus(5, ecl))
