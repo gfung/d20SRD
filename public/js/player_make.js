@@ -1,6 +1,8 @@
-let csrf = $("[name='csrf-token']").prop('content')
+let csrf = $("[name='csrf-token']").prop('content');
+let temp = JSON.parse($("#model_one").html());
+let skills=[];
+let feats=[];
 
-let temp = JSON.parse($("#model_one").html())
 for (each in temp.paths) {
     if ( (each != "_id") && (each !="__v") ) {
 
@@ -24,6 +26,7 @@ for (each in temp.paths) {
 
 if ($("#player_race")) {
     $.post("/race/list", {'_csrf':csrf}).then(function(data){
+        console.log(data)
         //append to html stuff
         $("#player_race_input").html(`
             <select id='player_race_input_select' name="player_race"></select>
@@ -48,6 +51,7 @@ if ($("#player_race")) {
 
 if ($("#player_class")){
     $.post("/class/list", {'_csrf':csrf}).then(function(data){
+        console.log(data)
         //add class function
        
         //append to html stuff
@@ -73,8 +77,11 @@ if ($("#player_class")){
                 }
             }
         }
+       
     })
 }
+
+
 
 let classnum=0;
 function add_class(){
@@ -90,3 +97,7 @@ function add_class(){
     $("#player_class_multi"+classnum).append($options)
     classnum++
 }
+
+$(document).ready(function(){
+    //check selections
+})
