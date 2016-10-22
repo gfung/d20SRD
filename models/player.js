@@ -12,6 +12,7 @@ const playerSchema = new mongoose.Schema({
             pclass_level: { type: Number }, 
         }
     ],
+    skills:[{ type: String }],
     player_race: {type: mongoose.Schema.Types.ObjectId, ref: 'Race'},
     player_name: { type: String, unique: true },
     ability_scores: {

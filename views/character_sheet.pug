@@ -176,7 +176,13 @@ block content
                     $("#"+data.player_class[i].pclass.proficiencies.saving_throws[j]+"_save").append('<i class="fa fa-check" aria-hidden="true"></i>')
                 }
             }
-            
+            //check off skills
+            //check off saving throws
+            for (let i=0;i< data.skills.length;i++){
+                $("#skill_"+data.skills[i].).append('<i class="fa fa-check" aria-hidden="true"></i>')
+            }
+
+
             /**
              *  race bonuses
              */
@@ -192,7 +198,8 @@ block content
              *  class bonuses
              */
 
-            //
+            //skills
+
 
             //levels and ECL
             for (let i =0;i < data.player_class.length;i++){
@@ -200,7 +207,7 @@ block content
                 $("#classlevel").append(data.player_class[i].pclass.name+" "+data.player_class[i].pclass_level)
                 ecl += data.player_class[i].pclass_level
                 //get features
-
+                
             }
             $("#classlevel").append(" ECL"+ecl)
             $("#pro_bonus").append(probonus(5, ecl))

@@ -26,7 +26,7 @@ for (each in temp.paths) {
 
 if ($("#player_race")) {
     $.post("/race/list", {'_csrf':csrf}).then(function(data){
-        console.log(data)
+        // console.log(data)
         //append to html stuff
         $("#player_race_input").html(`
             <select id='player_race_input_select' name="player_race"></select>
@@ -61,8 +61,11 @@ if ($("#player_class")){
             <div id="multi"></div>
             <br>
             <button type="button" id="add_class_button" onclick='add_class()'>Add Another Class</button>
+            <div><u>Skills</u></div>
+            <div id="skills"></div>
         `)
         for (let i = 0;i <data.length;i++){
+            //class select
             if(i==0){
                 if(data[i].name != undefined){
                     $("#player_class_input_select").append(`
@@ -77,7 +80,31 @@ if ($("#player_class")){
                 }
             }
         }
-       
+        
+        function skill_list() {    
+            $("#skills").empty();
+            for (let h=0;h<data.length;h++){
+                for (let j=0;j<data[h].proficiencies.skills.length;j++){
+                    if( $("#player_class_input_select").val() ==  data[h].name){
+                        $("#skills").append('<div><input type="checkbox" name="skills" value="'+data[h].proficiencies.skills[j]+'"> '+data[h].proficiencies.skills[j]+'</div>')
+                    }
+                }
+            }
+        };
+        skill_list();
+
+        $("#player_class_input_select").change(function(){
+            skill_list();
+        })
+        //check on change
+    //    $("#player_class_input_select").change(function(){
+    //        for (let i = 0;i <data.length;i++){
+    //            if (data[i].name ==$("#player_class_input_select").val()){
+    //                for (let j=0;j<data[i].proficiencies.skills;j++)
+    //                $("#skills").append('<input type="checkbox" name="skills"> '+ data[i].proficiencies.skills[j])
+    //            }
+    //        }
+    //    })
     })
 }
 

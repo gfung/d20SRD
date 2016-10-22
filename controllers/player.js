@@ -39,7 +39,7 @@ exports.post_player_make = (req, res, next) => {
 
     if (errors) {
         req.flash('errors', errors);
-        return res.redirect('/class/make');
+        return res.redirect('/player/make');
     }
 
     Player.findOne({ player_name: req.body.player_name }, (err, existingUser) => {
@@ -49,6 +49,7 @@ exports.post_player_make = (req, res, next) => {
             req.flash('errors', { msg: 'Account with name already exists.' });
             return res.redirect('/player/make');
         }
+        console.log(req.body)
         // No errors, no duplicates
         Char_class.findOne({'name' : req.body.player_class}).exec(function(err, class_data) {
             if (err) { return next(err); }
@@ -68,6 +69,7 @@ exports.post_player_make = (req, res, next) => {
                     player_class: alltheclasses,
                     player_race: race_data,
                     player_name: req.body.player_name,
+                    skills: req.body.skills,
                     ability_scores: {
                         str: parseInt(req.body['ability_scores.str']),
                         dex: parseInt(req.body['ability_scores.dex']),
@@ -77,10 +79,11 @@ exports.post_player_make = (req, res, next) => {
                         cha: parseInt(req.body['ability_scores.cha']),
                     }
                 });
+
                 player.save((err) => {
                     if (err) { return next(err); }
                     req.flash('info', { msg: 'Success!' });
-                    res.redirect('/player/make');
+                    return res.redirect('/player/make');
                 });
             })
         })
@@ -131,7 +134,7 @@ exports.post_player_sheet = (req, res, next) => {
             req.flash('errors', 'Could not retrieve Character data!');
             return next(err); }
         if(data) {
-            console.log(data)
+
             return res.send(data)
         }
     })
