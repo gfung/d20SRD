@@ -96,15 +96,7 @@ if ($("#player_class")){
         $("#player_class_input_select").change(function(){
             skill_list();
         })
-        //check on change
-    //    $("#player_class_input_select").change(function(){
-    //        for (let i = 0;i <data.length;i++){
-    //            if (data[i].name ==$("#player_class_input_select").val()){
-    //                for (let j=0;j<data[i].proficiencies.skills;j++)
-    //                $("#skills").append('<input type="checkbox" name="skills"> '+ data[i].proficiencies.skills[j])
-    //            }
-    //        }
-    //    })
+
     })
 }
 
