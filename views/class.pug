@@ -38,7 +38,8 @@ block content
         $("#has_magic").on('click', function(){
             $("[name*='spell_slots.cantrips']").parent().toggle();
             $("[name*='spell_slots.spells']").parent().toggle();
-            $("[name*='spell_slots.spells']").after(`<div><label>Caster type</label> : <select name="caster_type">
+            $("#caster_type").empty()
+            $("[name*='spell_slots.spells']").after(`<div id='caster_type'><label>Caster type</label> : <select name="caster_type">
                 <option>Full</option>
                 <option>Partial</option>
             </select></div>`)

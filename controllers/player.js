@@ -69,7 +69,7 @@ exports.post_player_make = (req, res, next) => {
                     player_class: alltheclasses,
                     player_race: race_data,
                     player_name: req.body.player_name,
-                    skills: req.body.skills,
+                    skills: req.body.class_skills_list,
                     ability_scores: {
                         str: parseInt(req.body['ability_scores.str']),
                         dex: parseInt(req.body['ability_scores.dex']),
@@ -79,9 +79,11 @@ exports.post_player_make = (req, res, next) => {
                         cha: parseInt(req.body['ability_scores.cha']),
                     }
                 });
-
                 player.save((err) => {
-                    if (err) { return next(err); }
+                    if (err) { 
+                        req.flash('error', { msg: 'err!' });
+                        return res.redirect('/player/make');
+                    }
                     req.flash('info', { msg: 'Success!' });
                     return res.redirect('/player/make');
                 });
