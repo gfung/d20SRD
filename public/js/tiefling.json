@@ -1,0 +1,15 @@
+{
+	"name": "tiefling",
+	"stat_bonus": {
+		"str": 0,
+		"dex": 0,
+		"con": 0,
+		"wis": 0,
+		"int": 1,
+		"cha": 2
+	},
+	"race_size": "medium",
+	"features": ["darkvision", "hellish resistance", "infernal legacy" ],
+	"languages": ["common", "infernal"],
+	"speed": 30
+}

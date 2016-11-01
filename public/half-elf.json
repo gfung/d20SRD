@@ -1,0 +1,15 @@
+{
+	"name": "half elf",
+	"stat_bonus": {
+		"str": 0,
+		"dex": 0,
+		"con": 0,
+		"wis": 0,
+		"int": 0,
+		"cha": 2
+	},
+	"race_size": "medium",
+	"features": ["ability score improvement", "ability score improvement", "darkvision", "fey ancestry", "skill versatility"],
+	"languages": ["common", "elvish", "choice"],
+	"speed": 30
+}

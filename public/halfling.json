@@ -1,0 +1,15 @@
+{
+	"name": "halfling",
+	"stat_bonus": {
+		"str": 0,
+		"dex": 2,
+		"con": 0,
+		"wis": 0,
+		"int": 0,
+		"cha": 0
+	},
+	"race_size": "small",
+	"features": ["lucky", "brave", "halfling nimbleness"],
+	"languages": ['common', 'halfling'],
+	"speed": 35
+}

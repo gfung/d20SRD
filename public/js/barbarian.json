@@ -1,0 +1,51 @@
+{
+	"name": "barbarian",
+	"hit_die": 12,
+	"proficiencies" : {
+		"armor": ["light", "medium", "shield"],
+		"weapon": ["simple", "martial"],
+		"tools": [],
+		"saving_throws": ["str", "con"],
+		"skills": ["animal handling", "athletics", "intimidation", "nature", "perception", "survival"]
+	},
+	"features": [
+        0,
+        ["rage", "unarmored defense"],
+        ["reckless attack", "danger sense"],
+        ["primal path"],
+        ["ability score improvement"],
+        ["extra attack", "fast movement"],
+        ["path feature"],
+        ["feral instinct"],
+        ["ability score improvement"],
+        ["brutal critical"],
+        ["path feature"],
+        ["relentless rage"],
+        ["ability score improvement"],
+        ["brutal critical"],
+        ["path feature"],
+        ["persistent rage"],
+        ["ability score improvement"],
+        ["brutal critical"],
+        ["indomitable might"],
+        ["ability score improvement"],
+        ["primal champion"]
+    ],
+    "rage": {
+        "number": [0,2,2,3,3,3,4,4,4,4,4,4,5,5,5,5,5,6,6,6,0],
+        "damage": [0,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4]
+    }
+	// spell_slots:{
+	// 	cantrips_known: [],
+	// 	spells_known: [],
+	// 	level_one_spells: [],
+	// 	level_two_spells: [],
+	// 	level_three_spells: [],
+	// 	level_four_spells: [],
+	// 	level_five_spells: [],
+	// 	level_six_spells: [],
+	// 	level_seven_spells: [],
+	// 	level_eight_spells: [],
+	// 	level_nine_spells: [],
+	// }
+}

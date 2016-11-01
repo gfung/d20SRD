@@ -1,0 +1,15 @@
+{
+	"name": "dragonborn",
+	"stat_bonus": {
+		"str": 2,
+		"dex": 0,
+		"con": 0,
+		"wis": 0,
+		"int": 0,
+		"cha": 1
+	},
+	"race_size": "medium",
+	"features": ["draconic ancestry", "breath weapon", "damage resistance"],
+	"languages": ["common", "draconic"],
+	"speed": 30
+}

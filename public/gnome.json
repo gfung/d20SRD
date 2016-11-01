@@ -1,0 +1,15 @@
+{
+	"name": "dragonborn",
+	"stat_bonus": {
+		"str": 0,
+		"dex": 0,
+		"con": 0,
+		"wis": 0,
+		"int": 2,
+		"cha": 0
+	},
+	"race_size": "small",
+	"features": ["darkvision", "gnome cunning"],
+	"languages": ["common", "gnomish"],
+	"speed": 30
+}
