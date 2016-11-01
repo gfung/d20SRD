@@ -1,0 +1,39 @@
+{
+	"name": "wizard",
+	"hit_die": 8,
+	"proficiencies" : {
+		"armor": ["light"],
+		"weapon": ["simple", "hand crossbows", "longsword", "rapier", "shortsword"],
+		"tools": ["musical instrument", "musical instrument", "musical instrument"],
+		"saving_throws": ["dex", "cha"],
+		"skills": ["choose","choose","choose"]
+	},
+	"features": [
+        0,
+        ["spellcasting", "bardic inspiration"],
+        ["jack of all trades", "song of rest"],
+        ["bard college", "expertise"],
+        ["ability score improvement"], //4
+        ["bardic inspiration", "font of inspiration"],
+        ["countercharm", "bardic college feature"],
+        [],
+        ["ability score improvement"],
+        ["song of rest"],
+        ["bardic inspiration", "expertise", "magical secrets"],
+        [],
+        ["ability score improvement"],
+        ["song of rest"],
+        ["magical secrets", "bardic college feature"],
+        ["bardic inspiration"],
+        ["ability score improvement"],
+        ["song of rest"],
+        ["magical secrets"],
+        ["ability score improvement"],
+        ["superior inspiration"]
+    ],
+    "spell_slots":{
+	 	"cantrips_known":     [0,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],
+	 	"spells_known":       [0,4,5,6,7,8,9,10,11,12,14,15,15,16,18,19,19,20,22,22,22]
+    }
+}
+
