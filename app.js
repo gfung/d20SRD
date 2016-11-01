@@ -10,16 +10,18 @@ const chalk = require('chalk');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
 const dotenv = require('dotenv');
-const MongoStore = require('connect-mongo')(session);
+// const datastore = require('@google-cloud')
+// const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const path = require('path');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const FileStore = require('session-file-store')(session);
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -49,15 +51,15 @@ const app = express();
 /**
  * Connect to MongoDB.
  */
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
-mongoose.connection.on('connected', () => {
-  console.log('%s MongoDB connection established!', chalk.green('✓'));
-});
-mongoose.connection.on('error', () => {
-  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
-  process.exit();
-});
+// mongoose.Promise = global.Promise;
+// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+// mongoose.connection.on('connected', () => {
+//   console.log('%s MongoDB connection established!', chalk.green('✓'));
+// });
+// mongoose.connection.on('error', () => {
+//   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+//   process.exit();
+// });
 
 /**
  * Express configuration.
@@ -79,10 +81,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-    autoReconnect: true
-  })
+  store: new FileStore()
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -113,6 +112,7 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+
 /**
  * Primary app routes.
  */
@@ -139,8 +139,8 @@ app.route("/race/list")
 	.post(raceController.post_race_list)
 
 app.route("/class/make")
-	.get(classController.get_class_make)
-  .post(classController.post_class_make)
+    .get(classController.get_class_make)
+    .post(classController.post_class_make)
 app.route("/class/list")
   .post(classController.post_class_list)
 

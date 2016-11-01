@@ -10,6 +10,7 @@
     "test": "mocha --reporter spec --timeout 5000"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^0.5.0",
     "async": "^2.0.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.15.2",
@@ -39,7 +40,9 @@
     "passport-oauth": "^1.0.0",
     "pug": "^2.0.0-beta6",
     "request": "^2.74.0",
-    "validator": "^6.0.0"
+    "session-file-store": "^0.2.2",
+    "validator": "^6.0.0",
+    "yargs": "^6.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
