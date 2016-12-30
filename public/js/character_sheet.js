@@ -33,19 +33,20 @@ $.post("/player/character_sheet/"+sheet[3], {'_csrf': csrf, 'name': sheet[3]}).t
     }
 
     $('#Strength').append(abi_scores[0])
-    $('#Strengthbonus').append("+" + ((abi_scores[0]-10)/2) || 0 )
+    $('#Strengthbonus').append("+" + (Math.floor( (abi_scores[0]-10)/2) || 0 ) )
     $('#Dexterity').append(abi_scores[1])
-    $('#Dexteritybonus').append("+" + ((abi_scores[1]-10)/2) || 0 )
+    $('#Dexteritybonus').append("+" + (Math.floor( (abi_scores[1]-10)/2) || 0 ))
     $('#Constitution').append(abi_scores[2])
-    $('#Constitutionbonus').append("+" + ((abi_scores[2]-10)/2) || 0 )
+    $('#Constitutionbonus').append("+" + (Math.floor( (abi_scores[2]-10)/2) || 0 ))
     $('#Intelligence').append(abi_scores[3])
-    $('#Intelligencebonus').append("+" + ((abi_scores[3]-10)/2) || 0 )
+    $('#Intelligencebonus').append("+" + (Math.floor( (abi_scores[3]-10)/2) || 0 ))
     $('#Wisdom').append(abi_scores[4])
-    $('#Wisdombonus').append("+" + ((abi_scores[4]-10)/2) || 0 )
+    $('#Wisdombonus').append("+" + (Math.floor( (abi_scores[4]-10)/2) || 0 ))
     $('#Charisma').append(abi_scores[5])
-    $('#Charismabonus').append("+" + ((abi_scores[5]-10)/2) || 0 )
+    $('#Charismabonus').append("+" + ((Math.floor( abi_scores[5]-10)/2) || 0 ))
     
     //check off saving throws
+    
     for (let i=0;i< data.player_class.length;i++){
         for ( let j=0;j<data.player_class[i].pclass.proficiencies.saving_throws.length;j++){
             let saving_pro_total=parseInt( probonus(5, ecl) ) + parseInt($("#"+data.player_class[i].pclass.proficiencies.saving_throws[j]+"_save").siblings()[1].innerText.substring(7))
@@ -54,8 +55,9 @@ $.post("/player/character_sheet/"+sheet[3], {'_csrf': csrf, 'name': sheet[3]}).t
     }
     //check off skills
     for (let i=0;i< data.skills.length;i++){ 
-        let skill_pro_total=parseInt( probonus(5, ecl) ) + parseInt($("#skill_"+data.skills[i]).siblings()[1].innerText.substring(7))
-        $("#skill_"+data.skills[i]).append(' <i class="fa fa-check" aria-hidden="true"></i>: +'+ skill_pro_total )
+        let skillname = data.skills[i].split(" ")
+        let skill_pro_total= parseInt( probonus(5, ecl) ) + parseInt($("#skill_"+skillname[0]).siblings()[1].innerText.substring(7))
+        $("#skill_"+skillname[0]).append(' <i class="fa fa-check" aria-hidden="true"></i>: +'+ skill_pro_total )
     }
     /**
      *  race bonuses

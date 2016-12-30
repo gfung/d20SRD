@@ -49,10 +49,10 @@ exports.post_player_make = (req, res, next) => {
             req.flash('errors', { msg: 'Account with name already exists.' });
             return res.redirect('/player/make');
         }
-        console.log(req.body)
         // No errors, no duplicates
         Char_class.findOne({'name' : req.body.player_class}).exec(function(err, class_data) {
             if (err) { return next(err); }
+            
             Race.findOne({'name' : req.body.player_race}).exec(function(err, race_data) {
                 if (err) { return next(err); }
                 let alltheclasses=[];
@@ -65,7 +65,7 @@ exports.post_player_make = (req, res, next) => {
                 }else {
                     alltheclasses.push({pclass: class_data, pclass_level: parseInt(req.body.player_class_level) })
                 }
-                const player = new Player({
+                let player = new Player({
                     player_class: alltheclasses,
                     player_race: race_data,
                     player_name: req.body.player_name,

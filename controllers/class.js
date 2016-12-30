@@ -93,6 +93,8 @@ exports.post_class_make = (req, res, next) => {
             break;
     }
 
+    console.log( trim_it(req.body['proficiencies.saving_throws']) )
+    
     const char_class = new Class({
         name: req.body.name,
         hit_die: req.body.hit_die,
