@@ -1,0 +1,108 @@
+<!-- header -->
+<header class="app-header navbar" id="header" role="menu">
+  <!-- navbar header -->
+  <div class="navbar-header bg-dark">
+    <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+			<i class="glyphicon glyphicon-cog"></i>
+		</button>
+    <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+			<i class="glyphicon glyphicon-align-justify"></i>
+		</button>
+    <!-- brand -->
+    <a class="navbar-brand text-lt" href="#/">
+			<img src="/public/img/logo.png" alt="Hattori Hanzo Shears"/>
+			<span class="hidden-folded m-l-xs">Hanzo</span>
+		</a>
+    <!-- / brand -->
+  </div>
+  <!-- / navbar header -->
+  <!-- navbar collapse -->
+  <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+    <!-- search form -->
+    <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search"
+      ng-controller="TypeaheadDemoCtrl">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control input-sm bg-light no-border rounded padder" type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8"
+            placeholder="Search ..." />
+          <span class="input-group-btn">
+						<button class="btn btn-sm bg-light rounded" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+        </div>
+      </div>
+    </form>
+    <!-- / search form -->
+    <!-- navbar right -->
+    <ul class="nav navbar-nav navbar-right">
+      <!--<span>-->
+      <li>
+        <a data-toggle="dropdown" class="dropdown-toggle" *ngIf="cUser">
+          <div *ngIf="cUser.session.locationType==1">
+            <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+            <span translate="header.navbar.new.NEW">
+        <i class='fa fa-map-marker' alt="On-Site" ></i>
+        <span class='caret'></span>
+            </span>
+          </div>
+          <div *ngIf="cUser.session.locationType==2">
+            <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+            <span translate="header.navbar.new.NEW">
+            <i class='fa fa-mortar-board' alt="On-Site" ></i>
+            <span class='caret'></span>
+            </span>
+          </div>
+          <div *ngIf="cUser.session.locationType==3">
+            <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+            <span translate="header.navbar.new.NEW">
+            <i class='fa fa-scissors' alt="On-Site" ></i>
+            <span class='caret'></span>
+            </span>
+          </div>
+          <div *ngIf="cUser.session.locationType==4">
+            <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+            <span translate="header.navbar.new.NEW">
+            <i class='fa fa-home' alt="On-Site" ></i>
+            <span class='caret'></span>
+            </span>
+          </div>
+          <div *ngIf="cUser.session.locationType==5">
+            <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+            <span translate="header.navbar.new.NEW">
+            <i class='fa fa-truck' alt="On-Site" ></i>
+            <span class='caret'></span>
+            </span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <!--gravatar icon-->
+        <a data-toggle="dropdown" class="dropdown-toggle clear" *ngIf="cUser">
+          <span class="hidden-sm hidden-md"> {{cUser.user.displayName}}</span>
+          <b class="caret"></b>
+          <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+            <img *ngIf="cUser.user.gravatar" [src]="cUser.user.gravatar" />
+            <i class="on md b-white bottom"></i>
+          </span>
+        </a>
+        <!--dropdown-->
+        <ul class='dropdown-menu animated fadeInRight w'>
+          <li>
+            <a ui-sref="app.page.profile"> Profile</a>
+          </li>
+          <li>
+            <a ui-sref="app.docs"> Help</a>
+          </li>
+          <li class='divider'></li>
+          <li>
+            <a ui-sref="access.signin"> Sign Out</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- / navbar right -->
+  </div>
+  <!-- / navbar collapse -->
+</header>
+<!-- / header -->
