@@ -1,7 +1,0 @@
-{
-  "data": [
-    { "directory": "/jobs", "filename": "test.sh", "lastRun": "2017-05-25T18:50:55.286Z", "pid":"18909"},
-    { "directory": "/avalara", "filename": "updateTaxRates.js", "lastRun": "2017-05-25T18:50:55.286Z", "pid":"18909"},
-    { "directory": "/payments", "filename": "updateExpiry.js", "lastRun": "2017-05-25T18:50:55.286Z", "pid":"18909"}
-  ]
-}

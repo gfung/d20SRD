@@ -19,22 +19,4 @@ export class InMemoryDataService implements InMemoryDbService {
     };
     return { user };
   }
-
-  createDB() {
-    let toolList = [
-      {
-        directory: '/jobs',
-        filename: 'test.js',
-        lastRun: 'somedatestring',
-        pid: '1'
-      },
-      {
-        directory: '/avalara',
-        filename: 'updatetaxrates.js',
-        lastRun: 'somedatestring',
-        pid: '2'
-      }
-    ];
-    return { toolList };
-  }
 }
